@@ -1,0 +1,42 @@
+/*Escribir una función que reciba un arreglo de números enteros positivos y mezclesus elementos. 
+La cantidad de elementos del arreglo se pasa mediante un segundo parámetro entero.
+● Ejemplo 1:
+○ Vector A: 3,5,7,9,15, dim 5
+○ Vector A(mezclado): 3,7,15,9,5, dim 5
+*/
+
+#define DIM
+
+
+
+void mezclarvec(int vec[], int DIM){
+    for(int i=0; i <DIM; i++){
+        int rand =randInt(0, dim-1)//porque arranco en 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+        int aux = v[rand];
+        v[rand]= v[i];
+        v[i]=aux;
+
+    }
+}
+
+//------------------------------------------------------------------------------------------------
+/*¿Cómo cambiaría el programa si no se pasara el segundo parámetro y se indicarala finalización del arreglo mediante un elemento con el valor -1?
+● Ejemplo 2:
+○ Vector A: 3,5,7,9,15,-1
+○ Vector A(mezclado): 3,7,15,9,5,-1*/
+
+#define MARCAFIN -1
+
+void mezclaArreglo(int arr[]){
+    
+    int aux, idx;
+    int i = 0;
+
+    while(arr[i] != MARCAFIN){
+        
+        idx = randInt(0,i);
+        aux = arr[idx];
+        arr[idx] = arr[i];
+        arr[i++] = aux;
+    }
+}
