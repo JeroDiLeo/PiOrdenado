@@ -5,13 +5,13 @@ en s1. */
 #include <string.h>
 #include <assert.h>
 
-void elimina(char s[], const char s2[],const char s3[]){
+void elimina(char s1[], const char s2[],const char s3[]){
     int i2 = 0;
     int i3= 0;
     int k=0;
-    for(int i1=0; s[i1]!='\0';i1++){                        //recorro s1 hasta que encuentra el final
-        if((s[i1]!=s2[i2]) && (s[i1]!=s3[i3])){             //si el caracter de s1 no esta en s2 ni en s3       
-            s[k++]=s[i1];                                           //lo copio
+    for(int i1=0; s1[i1]!='\0';i1++){                        
+        if((s1[i1]!=s2[i2]) && (s1[i1]!=s3[i3])){             //si el caracter de s1 no esta en s2 ni en s3       
+            s1[k++]=s1[i1];                                           //lo copio(es como si pisara el caracter de s1)
         }
         if(s2[i2] !='\0'){                                  //si no llego al final de s2 avanzo
             i2++;
@@ -20,16 +20,16 @@ void elimina(char s[], const char s2[],const char s3[]){
             i3++;
         }
     }
-    s[k]='\0';                                             //pongo el fin de cadena
+    s1[k]='\0';                                             //pongo el fin de cadena
     
 }
 
 
 int main(void) {
-char s[] = "abc";
-elimina(s, "123", "cab");
+char s1[] = "abc";
+elimina(s1, "123", "cab");
 assert(strcmp(s, "abc") == 0); // No se eliminan caracteres
-elimina(s, "axc", "xbc");
+elimina(s1, "axc", "xbc");
 // Se elimina la a porque está en s2 en la misma posición
 // se elimina la b porque está en s3 en la misma posición
 // Se elimina la c porque está en s2 o en s3 en la misma posición

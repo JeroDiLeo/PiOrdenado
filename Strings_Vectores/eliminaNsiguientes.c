@@ -4,40 +4,16 @@ y los n caracteres siguientes a la misma. Si el caracter recibido no es una letr
 */
 
 
-void eliminaN(char *string, char letra, int n){
-   int j;
-   if(!(isalpha(letra) && n > 0)){
-       return;
-   }
-  
-       int i;
-       for(i = 0, j = 0; string[i]; i++){
-              
-           if(string[i] != letra){
-               string[j++] = string[i];
-           } else {
-               for(int aux = n; string[i] && aux != 0; i++, aux--){
-
-
-               }
-              
-           }
-          
-       } 
-       string[j] = '\0';
-   }
-
-//---------------------------------------------(El de abajo es de keo)
 #include <stdio.h>
 #include <ctype.h>
 
 
-void eliminaN(char s, char x, int n);
+void eliminaN(char s, char x, int n); //x es la letra que quiero eliminar y n es la cantidad de caracteres que quiero eliminar despues de la letra
 
 void eliminaN(char * s, char x, int n){
      int cont=0;
      char l;
-     char a=toupper(x);     //convierte a mayuscula(LA LETRA QUE QUIERO ELIMINAR)
+     char a=toupper(x);     
      int i=0;
      while(s[i]!=0){
           l=toupper(s[i]);      //convierte a mayuscula(LA LETRA QUE ESTOY ANALIZANDO)
