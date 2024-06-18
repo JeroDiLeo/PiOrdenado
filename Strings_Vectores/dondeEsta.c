@@ -5,13 +5,27 @@ Vector: 3, 5,5, 5, 5,6, 7, 7, 8, 9, 12,15
 Elemento a buscar: 5
 Está en posiciones 1,2,3 y 4
 */
-int dondeEsta(int vec[], int n, int val, int pos[]){
-    int i, j = 0;
-    for (i = 0; i < n && vec[i]<val; i++)
-        ;
-    for (; i < n && vec[i]==val; i++){
-        pos[j++] = i;
+
+#include <stdio.h>
+#define N 12
+int dondeEsta(int vec[], int dim, int num, int pos[]){
+    int cont=0;
+    for(int i=0; i<dim && vec[i]<=num; i++){    
+        if(vec[i]==num){
+            pos[cont]=i;    //guardo la posicion en el vector de posiciones
+            cont++;       //aumento el contador de posiciones o apariciones
+        }
     }
-    
-    return j;
+    return cont;            //devuelvo la cantidad de apariciones
 }
+
+
+
+
+
+
+
+
+
+
+
