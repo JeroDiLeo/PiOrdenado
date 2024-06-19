@@ -23,7 +23,7 @@ Si recibe "a,e,i,o,u" lo deja igual
 
 int isVocal(char c){
 	char vocal=toupper(c);
-	return (vocal=='A' || vocal=='E' || vocal=='I' || vocal=='O' || vocal=='U');	//si c es una vocal, devuelve 1, sino 0
+	return (vocal=='a' || vocal=='e' || vocal=='i' || vocal=='o' || vocal=='u');	//si c es una vocal, devuelve 1, sino 0
 }
 //-----------------------Dos formas(para funcion aux)-----------------------
 int isVocal(char c){
