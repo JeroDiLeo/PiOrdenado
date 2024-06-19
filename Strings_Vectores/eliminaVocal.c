@@ -17,16 +17,22 @@ Si recibe "pa po pi po pu" lo deja como "p p p p p"
 Si recibe "aeiou" lo deja igual
 Si recibe "a,e,i,o,u" lo deja igual
 */
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
-
-
+int isVocal(char c){
+	char vocal=toupper(c);
+	return (vocal=='A' || vocal=='E' || vocal=='I' || vocal=='O' || vocal=='U');	//si c es una vocal, devuelve 1, sino 0
+}
+//-----------------------Dos formas(para funcion aux)-----------------------
 int isVocal(char c){
 
   	static char vocales[] = "AEIOU";
 
-  	char * p = strchr(vocales, toupper(c));				//me guarda la letra en p y me devuelve 1 
+  	char * p = strchr(vocales, toupper(c));				//strchr devuelve un puntero a la primera ocurrencia de c en vocales
 
-	return p != NULL;
+	return (p != NULL);									//si p es distinto de NULL, es porque c es una vocal => devuelve 1
 
 }
 
@@ -40,12 +46,12 @@ void eliminaVoc(char * s){
   	for (int i=0; s[i] != '\0'; i++){
 
     	char a= s[i];
-    	char n= s[i+1];
+    	char n= s[i+1];		//Guardo el caracter siguiente para ver si 'a' cumple con las condiciones
   
 
     	if ( !(isVocal(a) && ( ( (isalpha(n) && !isVocal(n) ) ) || ( isalpha(l) && !isVocal(l))) )  ){
         	s[t++] = s[i]; 
-   			l = a;
+   			l = a;	
     	}
 
 
