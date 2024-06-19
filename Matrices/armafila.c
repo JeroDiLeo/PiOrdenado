@@ -26,11 +26,13 @@ Dada la siguiente matriz, retorna 4541
 */
 
 int verifica(int mat[][M]){
-
-	int aux = armaFila(mat, 0);
+	if(mat == NULL|| N<=0 || M<=0){
+		return -1;
+	}
+	int aux = armaFila(mat, 0);	 	//inicializo aux con el primer numero de la matriz o -1 si no se puede armar(Me sirve para ir comparando con los demas)
 	for(int i=1; i<N; i++){
-		int suma = armaFila(mat, i);
-		if(aux<suma){
+		int suma = armaFila(mat, i); 
+		if(aux<suma){				//Si el nuevo numero es mayor que el que tenia, lo reescribo. Sino mantengo
 			aux = suma;
 		}
 	}
@@ -41,15 +43,15 @@ int verifica(int mat[][M]){
 
 int armaFila(int mat[][M], size_t fila){
 
-	int resultado = 0;
+	int numero = 0;
 
 	for(int i = 0; i<M; i++){
 		if( mat[fila][i]<0 || mat[fila][i]>9){
 			return -1;
 		}
-		resultado = (resultado*10 + mat[fila][i]);
+		numero = (numero*10 + mat[fila][i]);
 
 	}
 
-	return resultado;
+	return numero;
 }
