@@ -21,24 +21,26 @@ int nQueens(unsigned int n, char mat[][n]){
 	}
     int rta = 1;
 	int queens = 0;
-    for (int i = 0; i < n && rta; i ++){
+    for (int i = 0; i < n && rta; i ++){    //si rta es 0, no se verifica más
         for (int j = 0; j < n && rta; j++){
                 if(mat[i][j]=='1') {    // Si hay una reina en la posición i,j se verifica que no esté amenazada
 					queens++;
-                    rta = ! isUnderAttack(n, mat, i, j);
+                    rta = ! isUnderAttack(n, mat, i, j);    //Si isUnderAttack devuelve 1, la reina está amenazada => rta=0
 				}
         }
     }
     return rta && queens==n;        // Se verifica que no haya más ni menos de n reinas
 }
+// Función auxiliar que verifica si una reina en la posición row,col está amenazada
 int isUnderAttack(unsigned int n, char mat[][n], int row, int col){
     static int direcciones [][2]={{-1,-1},{-1,0},{-1,1},{0,-1},{0,1},{1,-1},{1,0},{1,1}};   
     int rta = 0;
-    for(int d=0; d < DIR && !rta; d++){
-        rta = hasQueen(n, mat, row+direcciones[d][0],col+direcciones[d][1], direcciones[d]);
+    for(int d=0; d < DIR && !rta; d++){ //si rta es 1, no se verifica más
+        rta = hasQueen(n, mat, row+direcciones[d][0],col+direcciones[d][1], direcciones[d]);    //SI hasqueen devuelve 1, hay una reina en la dirección d
     }
     return rta;
 }
+// Función auxiliar que verifica si hay una reina en la posición row,col en la dirección dir
 int hasQueen(unsigned int n, char mat[][n], int row, int col, int dir[2]){
     for(int i = row, j = col; i >=0 && i <n && j >= 0 && j < n ; i+=dir[0],j+=dir[1])
             if(mat[i][j]=='1')
