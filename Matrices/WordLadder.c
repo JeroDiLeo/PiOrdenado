@@ -26,12 +26,12 @@ y retorna 1 si la matriz corresponde a una escalera de palabras y 0 sino*/
 
 int
 isWordLadder(unsigned words, unsigned length, char matrix[][length]) {
-    for(int i = 0, lastLadderCol = -1; i < words - 1; i++) { // Comparo de a pares de filas
-        int ladderCol = -1; // La columna del cambio del par de filas
+    for(int i = 0, lastLadderCol = -1; i < words - 1; i++) { // LastladdeCol es la columna del cambio del par anterior(Que necesito para compararla con la actual para q no se repita)
+        int ladderCol = -1; // La columna del cambio del par de filas actual
         for(int j = 0; j < length; j++) {
             if(toupper(matrix[i][j]) != toupper(matrix[i+1][j])) { // Encontré un cambio
                 // Termina si es el segundo cambio o coincide en columna con el cambio del par anterior
-                if(ladderCol >= 0 || j == lastLadderCol) {
+                if(ladderCol >= 0 || j == lastLadderCol) { //El caso de j==lastLadderCol es para evitar que se repita la columna
                     return 0;
                 }
                 ladderCol = j;
@@ -40,7 +40,7 @@ isWordLadder(unsigned words, unsigned length, char matrix[][length]) {
         if(ladderCol == -1) { // Termina si no se encontró ningún cambio en la fila
             return 0;
         }
-        lastLadderCol = ladderCol;
+        lastLadderCol = ladderCol;  // Guardo la columna del cambio del par actual para compararla con la siguiente
     }
     return 1;
 }
