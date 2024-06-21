@@ -9,7 +9,8 @@ A: AMARILLO significa que la letra está presente en la palabra pero en la posic
 G: GRIS significa que la letra NO está presente en la palabra.
 	hasta que se marque el primer intento correcto (todas las letras verdes) o se hayan analizado todos los intentos.
 	La función debe retornar un entero con el número del primer intento correcto (todas las letras verdes) o -1 si ningún intento es correcto.
-Notar que tanto la palabra oculta como las palabras de los intentos pueden contener letras repetidas. En ese caso, las pistas son independientes para cada letra y tienen prioridad: verde tiene mayor prioridad al amarillo.
+Notar que tanto la palabra oculta como las palabras de los intentos pueden contener letras repetidas. 
+En ese caso, las pistas son independientes para cada letra y tienen prioridad: verde tiene mayor prioridad al amarillo.
 
 Ejemplos:
 	Con FILS = 6 y COLS = 5, donde la palabra secreta a adivinar es R O S A S y el usuario hace los siguientes 6 intentos: 
@@ -46,8 +47,7 @@ int wordle(const char *, const char [][COLS], int, char [][COLS]);
 static int wordleRow(const char [COLS], const char *, char [COLS]);
 static int wordleLetter(const char *, char, int);
 
-int
-wordle(const char * secretWord, const char inputMatrix[][COLS], int inputDim, char outputMatrix[][COLS]) {
+int wordle(const char * secretWord, const char inputMatrix[][COLS], int inputDim, char outputMatrix[][COLS]) {
     int i, greenRow;
     for(i = 0, greenRow = 0; i < inputDim && !greenRow; i++) {
         greenRow = wordleRow(secretWord, inputMatrix[i], outputMatrix[i]);
@@ -65,8 +65,7 @@ wordleRow(const char * secretWord, const char inputRow[COLS], char outputRow[COL
     return greenLetter;
 }
 
-static int
-wordleLetter(const char * secretWord, char inputLetter, int inputIndex) {
+static int wordleLetter(const char * secretWord, char inputLetter, int inputIndex) {
     if(secretWord[inputIndex] == inputLetter) {
         return GREEN;
     }
@@ -76,18 +75,20 @@ wordleLetter(const char * secretWord, char inputLetter, int inputIndex) {
     return GREY;
 }
 
-// Otra versión correcta, usando un vector de apariciones
+// Otra versión correcta, usando un vector de apariciones. Esta esta mucho mejor
 #define LETTERS 255
 
-int
-wordle2(const char * secretWord, const char inputMatrix[][COLS], int inputDim, char outputMatrix[][COLS]) {
+int wordle2(const char * secretWord, const char inputMatrix[][COLS], int inputDim, char outputMatrix[][COLS]) {
     int i, j, greenCount;
     char secretWordLetters[LETTERS] = {0};
-    for(int x = 0; secretWord[x]; x++)
-        secretWordLetters[secretWord[x]] = 1;
+    for(int x = 0; secretWord[x]; x++)          // Cuento las letras de la palabra secreta y las marco como presentes en el vector de apariciones
+        secretWordLetters[secretWord[x]] = 1;       
+
     for(i = 0; i < inputDim && greenCount != COLS; i++) {
         for(j = 0, greenCount = 0; j < COLS; j++) {
+
             char inputLetter = inputMatrix[i][j];
+
             if(secretWord[j] == inputLetter) {
                 outputMatrix[i][j] = GREEN;
                 greenCount++;
