@@ -9,7 +9,7 @@ void elimina(char s1[], const char s2[],const char s3[]){
     int i2 = 0;
     int i3= 0;
     int k=0;
-    for(int i1=0; s1[i1]!='\0';i1++){                        
+    for(int i1=0; s1[i1]!='\0';i1++){                            
         if((s1[i1]!=s2[i2]) && (s1[i1]!=s3[i3])){             //si el caracter de s1 no esta en s2 ni en s3       
             s1[k++]=s1[i1];                                           //lo copio(es como si pisara el caracter de s1)
         }

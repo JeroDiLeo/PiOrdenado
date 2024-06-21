@@ -18,18 +18,18 @@ Resulta:
 S = “El sol sale por el este”
 */
 void eliminaN(char *s, char letter){
-    if(!=isalpha(letter))
+    if(!isalpha(letter) || s[0]=='\0')
         return;
     char c=toupper(letter);
     int t=0;
-    for(int i=0;s[i]!='\0'){
+    for(int i=0;s[i]!='\0';i++){
         if(toupper(s[i])!=c){
-            s[t++]=s[i++];
+            s[t++]=s[i];
         }else{
             i++;
-            if(s[i+1]!='\0'){
+            if(s[i]!='\0'){
                 i++;
-                if(s[i+1]!='\0'){
+                if(s[i]!='\0'){
                     i++;
                 }
             }
