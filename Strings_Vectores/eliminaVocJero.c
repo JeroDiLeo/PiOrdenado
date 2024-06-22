@@ -18,26 +18,43 @@ Si recibe "aeiou" lo deja igual
 Si recibe "a,e,i,o,u" lo deja igual
 */
 #include <stdio.h>
-#include <string.h>
 #include <ctype.h>
 
-int isalpha(char c){
-    return (c>='a' && c<='z') || (c>='A' && c<='Z');   //Devuelve 1 si c es una letra, sino 0
+// Función para verificar si un carácter es una vocal
+int isVocal(char letra) {
+    char c = tolower(letra);
+    return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
 }
-int isVocal(char c) {
-    char vocal = tolower(c);
-    return (vocal == 'a' || vocal == 'e' || vocal == 'i' || vocal == 'o' || vocal == 'u');
-}
-void eliminaVoc(char* str) {
-    int i, j;
-    for (i = 0; str[i] != '\0'; i++) {
-        if (isVocal(str[i])) {
-            if ((i > 0 && !isalpha(str[i-1])) || (str[i+1] != '\0' && !isalpha(str[i+1]))) {    //Veo si la vocal esta suelta
-                for (j = i; str[j] != '\0'; j++) {  //Desplaza todo a la izq
-                    str[j] = str[j+1];              //Sobre escribo el caracter actual con el siguiente
-                }
-                i--;
-            }
+
+// Función para eliminar vocales según las reglas especificadas
+void eliminaVoc(char *s) {
+    int t = 0;
+    for (int i = 0; s[i] != '\0'; i++) {
+        if (!isVocal(s[i]) || 
+            ((i > 0 && !isVocal(s[i-1])) || (s[i+1] != '\0' && !isVocal(s[i+1])))) {
+            s[t++] = s[i];
         }
     }
-}   
+    s[t] = '\0';
+}
+
+//---------------Esta solucion de abajo que hice se entiende mejor-----------------
+
+int isVocal(char letra){
+    char c=tolower(letra);
+    if(c=='a'||c=='e'||c=='i'||c=='o'||c=='u'){
+        return 1;
+    }else{
+        return 0;
+    }
+
+}
+void eliminaVoc(char *s){
+    int t=0;
+    for(int i=0;s[i]!='\0';i++){
+        if ((!isVocal(s[i]))||((i > 0 && isalpha(s[i-1])) || (s[i+1] != '\0' && isalpha(s[i+1])))){
+            s[t++]=s[i];
+        }
+    }
+    s[t]='\0';
+}

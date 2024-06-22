@@ -28,3 +28,5 @@ void eliminaN(char * s, char x, int n){
      }
      s[cont]='\0';
 }
+
+//-------------------------------------
