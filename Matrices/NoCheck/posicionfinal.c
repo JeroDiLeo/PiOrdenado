@@ -103,7 +103,7 @@ int dentroDelTablero(int x, int y) {
 // Función principal para calcular la posición final y actualizar el tablero
 int posicionfinal(char tablero[][COLS], int xi, int yi, int dir, int n, int *xf, int *yf) {
     // Verificar parámetros
-    if (!dentroDelTablero(xi, yi) || dir < 0 || dir >= sizeof(direcciones) / sizeof(direcciones[0]) || n <= 0) {
+    if (!dentroDelTablero(xi, yi) || dir < 0 || n <= 0) {
         return ERRORPARAMETROS;
     }
 
