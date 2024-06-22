@@ -23,7 +23,49 @@ y retorna 1 si la matriz corresponde a una escalera de palabras y 0 sino*/
 #include <ctype.h>
 #include <assert.h>
 #define COLS 4
+//-----------------------Mi solucion----------------------------------------
+//numWords son las filas y wordLength las columnas
+int isWordLadder(unsigned int numWords, int wordLength,char words[][wordLength]){
+    for(int i=0;i<numWords-1;i++){  //numwords - 1 xq no quiero contemplar '\0'
+        int diffCount=0;
+        int diffPos=-1;
 
+        for(int j=0;j<wordLength; j++){
+            if(tolower(words[i][j])!=tolower(words[i+1][j])){
+                diffCount++;
+                //Si cambio mas de una letra
+                if(diffCount>1){
+                    return 0;
+                }
+                //Si la posicio de la letra que cambio se repite
+                if(diffPos!=-1 && diffPos==j){  
+                    return 0;
+                }
+                diffPos=j;
+            }
+        }
+        if(diffCount==0){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//----------------------------Solucion Catedra----------------------------------
 int
 isWordLadder(unsigned words, unsigned length, char matrix[][length]) {
     for(int i = 0, lastLadderCol = -1; i < words - 1; i++) { // LastladdeCol es la columna del cambio del par anterior(Que necesito para compararla con la actual para q no se repita)
