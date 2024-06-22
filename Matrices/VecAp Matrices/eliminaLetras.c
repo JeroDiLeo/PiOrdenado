@@ -20,43 +20,63 @@ Escribir una función que reciba un string s y una matriz de COLS columnas ( COL
 
 //En m[i][j] se guarda en que posicion esta la letra
 
+
+
+
+#include <stdio.h>
+#include <assert.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+#define COLS 5
+#define ERROR 0
+#define EXITO 1
+
+// Función para eliminar una letra de una posición específica en un string
 void eliminarLetraDelString(char *s, int pos) {
-    for (int i = pos;s[i]!='\0'; i++) {
+    for (int i = pos; s[i] != '\0'; i++) {
         s[i] = s[i + 1];
     }
 }
 
-
-int eliminaLetras(char s[], int m[][COLS], int nfilas);
-    if(COLS<0 ||COLS>26){
-        return ERROR;
+// Función que elimina letras del string y registra sus posiciones en la matriz
+int eliminaLetras(char s[], int m[][COLS], int nfilas) {
+    if (COLS < 1 || COLS > 26) {
+        return ERROR;  // Verifica si COLS está en el rango válido
     }
-    int filasUsadas[COLS]={0}; //Para llevar la cuenta de las filas usadas en cada columna
-     int i=0;
-    while(s[i]!='\0'){
-        char c=tolower(s[i]);
-        if(c>='a'&& c<'a'+ COLS){    //Veo si estoy en el rango de letras validos, como el ejemplo: veo si estoy entre la 'a' a la 'e'
-            int col=c-'a';          //Paso la letra en la que estoy a un "indice".Ej: si c='c' ==> col=2
-        
-            m[filasUsadas[col]][col]=i; //Guardo la posicion en el string de dicha letra en la matriz
-            filasUsadas[col]++;         //Aumento el vector de apariciones
 
-            eliminarLetraDelString(s,i);
-        }
-        else{
+    int filasUsadas[COLS] = {0}; // Para llevar la cuenta de las filas usadas en cada columna
+    int i = 0;
+
+    while (s[i] != '\0') {
+        char c = tolower(s[i]);
+        if (c >= 'a' && c < 'a' + COLS) { // Verifica si el carácter está en el rango de letras válidas
+            int col = c - 'a';  // Calcula la columna correspondiente a la letra
+            if (filasUsadas[col] >= nfilas) {
+                return ERROR;  // Verifica si hay espacio suficiente en la matriz
+            }
+
+            m[filasUsadas[col]][col] = i; // Guarda la posición en el string de dicha letra en la matriz
+            filasUsadas[col]++; // Incrementa el contador de filas usadas en la columna
+
+            eliminarLetraDelString(s, i); // Elimina la letra del string
+        } else {
             i++;
         }
-
-
     }
-    //Le pongo el fin en cada columna
-    for(int i=0; i<COLS; i++){
-        m[filasUsadas[i]][i]=-1;
+
+    // Añade el fin (-1) en cada columna de la matriz
+    for (int j = 0; j < COLS; j++) {
+        if (filasUsadas[j] < nfilas) {
+            m[filasUsadas[j]][j] = -1;
+        } else {
+            return ERROR;  // Verifica si hay espacio para el marcador de fin
+        }
     }
-    return 0;
 
-
-
+    return EXITO;
+}
 
 
 
