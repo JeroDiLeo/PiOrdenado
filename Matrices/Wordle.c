@@ -79,7 +79,8 @@ static int wordleLetter(const char * secretWord, char inputLetter, int inputInde
 
 // Otra versión correcta, usando un vector de apariciones. Esta esta mucho mejor
 //Este sirve si hay letras ASCII o si tengo que distinguir entre mayúsculas y minúsculas
-#define LETTERS 255
+
+#define LETTERS 256
 
 int wordle2(const char * secretWord, const char inputMatrix[][COLS], int inputDim, char outputMatrix[][COLS]) {
     int i, j, greenCount;
@@ -108,7 +109,6 @@ int wordle2(const char * secretWord, const char inputMatrix[][COLS], int inputDi
 //----------------------------------------------------------------------
 //Este sirve si solo hay letras mayúsculas
 #define LETTERS 26
-
 int wordle2(const char *secretWord, const char inputMatrix[][COLS], int inputDim, char outputMatrix[][COLS]) {
     int i, j, greenCount;
     char secretWordLetters[LETTERS] = {0};

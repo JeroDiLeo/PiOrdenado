@@ -39,7 +39,7 @@ La siguiente matriz cuadrada de dimensión 3x3 no es mágica pues no están todo
 
 */
 
-#define N
+#define N 5
 //Asumo que recibe solo numeros positivos
 int verificaNumeros(int m[][N]){
     int vecAp[N*N]={0};
@@ -73,6 +73,15 @@ int sumaColumna(int m[][N],int columna){
     }
     return sumaColumna;
 }
+int DiagonalesIguales(int m[][N]){
+    int sumaDiagonal1=0;
+    int sumaDiagonal2=0;
+    for(int i=0;i<N;i++){
+        sumaDiagonal1+=m[i][i];
+        sumaDiagonal2+=m[i][N-1-i];
+    }
+    return(sumaDiagonal1==sumaDiagonal2)
+}
 
 
 int magicCube(int m[][N]){
@@ -95,3 +104,51 @@ int magicCube(int m[][N]){
     }
 
 }
+
+
+
+
+int numeroValido(int num){
+    return (num>0 && num<=(N*N))
+}
+
+
+int magicCube(int m[][N]){
+    int vecAp[N*N]={0};
+    int sumaFil,sumaCol, modelo=0;
+    for(int i=0;i<N;i++){
+        sumaFil=0;
+        sumaCol=0;
+        for(int j=0; j<N;j++){
+            int fila=m[i][j];
+            int col=m[j][i];
+            if(!verifica(fila,col,vecAp,sumaFia,sumaCol,modelo,i)){
+                return NOT_MAGIC;
+            }
+        }
+        if(modelo!=sumaFila || modelo!=sumaCol){
+            return NOT_MAGIC;
+        }
+        return MAGIC;
+    }
+
+}
+
+
+int verifica(int fila, int col, int vecAp[], int *sumaFila,int *sumaCol, int modelo,int i){
+    if(numeroValido(fila)){
+        if(!vecAp[fila-1]){
+            vecAp[f-1]=1;
+        }else{
+            return NOT_MAGIC;
+        }
+        if(i==0)
+            modelo +=fila;
+        sumaFila+=fila;
+        sumaCol+=col;
+    }else{
+        return NOT_MAGIC;
+    }
+    return MAGIC;
+
+    }
