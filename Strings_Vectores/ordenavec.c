@@ -6,9 +6,26 @@ anterior, considerando que el primer elemento debe quedar en el vector.
 
 void ordena(int v[]){
    int copia=1;
-   for(int lect=1; v[lect]!=-1; lect++){
-      if(v[copia-1]<v[lect]){
-         v[copia++]=v[lect];
+   for(int i=1; v[i]!=-1; i++){  //arranco en 1 xq el primer elemento debe quedar
+      if(v[copia-1]<v[i]){    //si el que tengo en copia es menor que en el que estoy
+         v[copia++]=v[i];
+      }
+   }
+   v[copia]=-1;
+}
+
+
+
+
+
+
+
+void ordena(int v[]){
+   int copia=1;
+   for(int i=1;v[i]!=-1;i++){
+      if(v[copia-1]<v[i]){
+         v[copia]=v[i];
+         copia++;
       }
    }
    v[copia]=-1;
