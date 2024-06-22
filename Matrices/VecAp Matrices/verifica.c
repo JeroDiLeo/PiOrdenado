@@ -44,6 +44,93 @@ Si N es 6 y recibe la siguiente matriz, debe retornar 0. Si bien las 4 submatric
 // DIM: la dimension de cada submatriz
 #define DIM 3   
 #define MULT 3
+//Mi solucion
+//Me tengo que crear una funcion que me guarde el valor de una sub matriz
+int calculaSubMatriz(const int mat[][N], int posI, int posJ){
+    int suma=0;
+    int vecAp[3*N+1]={0};   //Le sumo uno xq sino iria de 0 a 31
+    int num;
+    // Recorrer los elementos de la submatriz
+    for(int i=posI; i<(posI+3);i++){
+        for(int j=posJ; j<(posJ+3);j++){
+            num=mat[i][j];
+            if(vecAp[num]==0 && num>=1 && num<=3*N){// Verificar si el elemento está dentro del rango y no se repite en la submatriz
+
+                vecAp[num]=1;
+                suma+=num;
+            }
+            else{
+                return 0;
+            }
+        }
+    }
+    return suma;
+}
+
+int verifica(const int mat[][N]){
+    int actual, anterior=-1;
+    // Recorrer las submatrices de 3x3
+    for(int i=0;i<N;i+=3){
+        for(int j=0;j<N;j+=3){
+            actual=calculaSubMatriz(mat,i,j);// Calcular el resultado de la submatriz actual
+    
+    // Verificar si se cumple la condición de la submatriz actual
+
+            if(actual==0 ||(i!=0 && actual!=anterior)){
+                return 0;
+            }else{
+            anterior=actual;
+            }
+        }
+        
+    }
+    return 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//--------------------Otra solucion con errores-------------------------
+
+
+
+
+
+
+
+
 
 // Función para verificar las condiciones de la matriz
 int verifica(const int mat[][N]){
