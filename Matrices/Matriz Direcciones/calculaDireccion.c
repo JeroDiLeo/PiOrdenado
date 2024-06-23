@@ -42,7 +42,7 @@ int camino(char mat[FILAS][COLS], int ancho, int alto, int x, int y, int dir){
         return 0;
     }
     longitud=1;
-    while(i>0 && i<alto-1 && j>0 && j<ancho-1 && mat[i][j]=='0'){   //Mientras no se llegue a un borde o a un obstáculo
+    while(i>0 && i<alto-1 && j>0 && j<ancho-1 && mat[i][j]=='0'){  //Es alto -1 y ancho -1 porque se considera que el tablero empieza en 0
         i+=dirx;
         j+=diry;
         longitud++;
@@ -53,7 +53,7 @@ int camino(char mat[FILAS][COLS], int ancho, int alto, int x, int y, int dir){
 //Esta función transforma un ángulo en coordenadas x e y
 void transformarXY(int angulo, int *dirx, int *diry){
     static int direcciones[][2]={{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1},{1,-1}};
-    int indice=angulo/45;
+    int indice=angulo/45;       //Me va a dar el índice de la matriz de direcciones(entre 1)
     *dirx=direcciones[indice][0];
     *diry=direcciones[indice][1];
 }
