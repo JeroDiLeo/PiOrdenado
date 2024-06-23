@@ -7,7 +7,7 @@ int chequeaSubcuadrados(char m[][DIM],int fila, int col){
     char vecAp[DIM]={0};
     for(int i=fila;i<fila+3;i++){
         for(int j=col;j<col+3; j++){
-            int numero=m[i][j];
+            char numero=m[i][j];
             if(numero>=1 && numero<=9 && vecAp[numero-1]==0){   //Si numero es 0 no se hace nada
                 vecAp[numero-1]++;
             }else{
@@ -80,6 +80,7 @@ int chequearCol(char m[][DIM], int col){
        if(v[aux] == 1){
            return 0;
        v[aux]++;
+       }
    }
    return 1;
 }
