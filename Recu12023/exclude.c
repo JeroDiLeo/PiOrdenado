@@ -56,12 +56,11 @@ void exclude(char *s1, const char *s2, const char *s3) {
     int j = 0;
     for (int i = 0; s1[i] != '\0'; i++) {
         char ch = tolower(s1[i]);
-        if (isalpha(ch) && to_remove[ch - 'a']) {
-            // Caracter está marcado para ser eliminado
-            continue;
+        if (isalpha(ch) && !to_remove[ch - 'a']) {
+            s1[j++] = s1[i];
         }
-        // Mantener el caracter en s1
-        s1[j++] = s1[i];
+        
+        
     }
     s1[j] = '\0'; // Terminar la cadena resultante
 }
