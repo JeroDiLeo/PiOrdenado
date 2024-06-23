@@ -25,36 +25,40 @@ Q S G S M A
 #include <assert.h>
 #include <string.h>
 
-#define COLS 6
+#define COLS 6  // Definición de la constante COLS que representa el número de columnas de la matriz
 
+// Función capicua: verifica si un arreglo de caracteres es un palíndromo
 int capicua(char v[], unsigned int dim) {
-	for(int i=0,j=dim-1; i < j; i++, j--) {
-		if(v[i] != v[j]) {
-			return 0;
-		}	
-	}
-	return 1;
-}
-
-void copiarFila(char m[][COLS], int destino, int origen) {
-    if (destino==origen) {
-        return;
+    for(int i = 0, j = dim - 1; i < j; i++, j--) {
+        if(v[i] != v[j]) {
+            return 0;  // No es palíndromo
+        }
     }
-	for(int i=0; i<COLS; i++)
-		m[destino][i] = m[origen][i];
+    return 1;  // Es palíndromo
 }
 
+// Función copiarFila: copia una fila de la matriz de origen a destino
+void copiarFila(char m[][COLS], int destino, int origen) {
+    if(destino == origen) {
+        return;  // Si el destino es igual al origen, no se hace ninguna copia
+    }
+    for(int i = 0; i < COLS; i++) {
+        m[destino][i] = m[origen][i];  // Copia cada elemento de la fila origen a la fila destino
+    }
+}
 
+// Función elimina: elimina las filas palíndromas de la matriz
 int elimina(char m[][COLS], unsigned int filas) {
-	int i, j;
-	for(i=0, j=0; i < filas; i++) {
-		if(!capicua(m[i], filas)) {
-			copiarFila(m, j, i);
-			j++;
-		}
-	}
-	return j;
+    int j = 0;  // Contador para las filas no palíndromas
+    for(int i = 0; i < filas; i++) {
+        if(!capicua(m[i], COLS)) {  // Si la fila no es un palíndromo
+            copiarFila(m, j, i);   // Copia la fila i en la posición j
+            j++;  // Incrementa el contador de filas no palíndromas
+        }
+    }
+    return j;  // Retorna el número de filas que quedaron en la matriz después de eliminar las palíndromas
 }
+
 
 int main(void) {
 

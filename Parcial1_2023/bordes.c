@@ -34,7 +34,7 @@ en el vector sumas se debe dejar el valor { 9 }
 */
 
 
-
+#define M 4
 
 
 
@@ -65,8 +65,8 @@ void bordes(int mat[M][M], int sumas[] ){
 int sumaCols(int m[][M], int borde){
   int suma=0;
   for(int i=borde; i < M-borde; i++ ){
-    suma += m[i][borde];
-    suma += m[i][M-1-borde];
+    suma += m[i][borde];  // Suma elementos de la columna izquierda del borde
+    suma += m[i][M-1-borde];  // Suma elementos de la columna derecha del borde
   }
   return suma;
 }
@@ -74,8 +74,8 @@ int sumaFilas( int m[][M], int borde){
   int suma=0;
   for(int i=borde+1; i< M-borde-1; i++){    
 //desde borde +1 hasta M-borde -1 por los extremos
-     suma += m[borde][i];
-     suma += m[M-1-borde][i];
+     suma += m[borde][i];       // Suma elementos de la fila superior del borde
+     suma += m[M-1-borde][i];   // Suma elementos de la fila inferior del borde
   }
   return suma;
 }
@@ -89,7 +89,7 @@ int sumBorde(const int m[][M], int borde){
 
 void bordes(int mat[][M], int sumas[]){
   for(int i=0; i<M/2 ; i++){
-    sumas[i]=sumBorde(mat, i);
+    sumas[i]=sumBorde(mat, i);  // Calcula y guarda la suma del borde i en sumas[i]
   }
 }
 
