@@ -25,15 +25,55 @@ assert(strcmp(u, "abc abc") == 0);
 En el ejemplo se muestran frases cortas, pero también podrían ser frases
 mucho más extensas, no sólo el primer string sino también los otros dos
 */
-
-
-
-
-
-
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+
+#define LETTERS ('z' - 'a' + 1)
+#define INDEX (tolower(s) - 'a')
+#define DELETE_CHAR 1
+#define KEEP_CHAR 0
+
+
+//La flag va a ser KEEP_CHAR si la letra esta en s3 y DELETE_CHAR si esta en s2
+void markAppearances(const char *s,unsigned char vec[LETTERS],char flag){
+    for(int i=0;s[i]!='\0';i++){
+        if(isalpha(s[i])){
+            vec[INDEX]=flag;        //Si flag es 1, marco las letras que debo eliminar
+        }
+    }
+}
+
+void exclude(char *s1, const char *s2, const char *s3) {
+    unsigned char to_remove[LETTERS] = {0}; // Arreglo para letras que deben ser eliminadas
+
+    // Marcar las letras de s2
+    markAppearances(s2,to_remove,DELETE_CHAR);
+    // Desmarcar las letras de s3
+    markAppearances(s3,to_remove,KEEP_CHAR);
+
+    // Recorrer s1 y construir la cadena resultante
+    int t = 0;
+
+    for (int i = 0; s1[i] != '\0'; i++) {
+        char c = tolower(s1[i]);
+        if (!isalpha(c) && !to_remove[c - 'a']) {     //Si no es una letra o si es una letra que no debo eliminar
+            s1[t++] = s1[i];    
+        }
+    }
+    s1[t] = '\0'; // Terminar la cadena resultante
+}
+
+  
+
+
+
+
+
+
+
+
+//-----------------Menos modularizado-----------------
 
 void exclude(char *s1, const char *s2, const char *s3) {
     int to_remove[26] = {0}; // Arreglo para letras que deben ser eliminadas

@@ -2,9 +2,12 @@
 
 // Definimos la dimensión del tablero
 #define DIM 3
+#define MINE -1
+#define DIR_AMOUNT 8
+#define VALID_INDEX(i, j) ((i) >= 0 && (i) < DIM && (j) >= 0 && (j) < DIM)
 
 // Matriz de direcciones para las 8 celdas adyacentes
-int direcciones[8][2] = {
+int direcciones[DIR_AMOUNT][2] = {
     {-1, -1}, {-1, 0}, {-1, 1}, // Celdas adyacentes superiores
     { 0, -1},          { 0, 1}, // Celdas adyacentes laterales
     { 1, -1}, { 1, 0}, { 1, 1}  // Celdas adyacentes inferiores
@@ -14,12 +17,12 @@ int direcciones[8][2] = {
 int contarMinasAdyacentes(signed char tablero[DIM][DIM], int fila, int col) {
     int minas = 0;
     // Recorre las direcciones adyacentes
-    for (int i = 0; i < 8; i++) {
-        int nuevaFila = fila + direcciones[i][0];
-        int nuevaCol = col + direcciones[i][1];
+    for (int d = 0; d < DIR_AMOUNT; d++) {
+        int nuevaFila = fila + direcciones[d][0];
+        int nuevaCol = col + direcciones[d][1];
         // Verifica que las coordenadas estén dentro del tablero
-        if (nuevaFila >= 0 && nuevaFila < DIM && nuevaCol >= 0 && nuevaCol < DIM) {
-            if (tablero[nuevaFila][nuevaCol] == -1) {
+        if (VALID_INDEX(nuevaFila, nuevaCol)){
+            if (tablero[nuevaFila][nuevaCol] == MINE) {
                 minas++;
             }
         }

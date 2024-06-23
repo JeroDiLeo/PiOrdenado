@@ -20,6 +20,50 @@ Si recibe "a,e,i,o,u" lo deja igual
 #include <stdio.h>
 #include <ctype.h>
 
+
+int isVocal(char letra){
+    char c=tolower(s[i]);
+    return(c=='a'||c=='e' ||c=='i'||c=='o'||c=='u');
+}
+
+void eliminaVoc(char s[]){
+    int t=0;
+    for(int i=0;s[i]!='\0';i++){
+                            //SI ES VOCAl    Y                         (  ESTA ENTRE DOS VOCALES  )        O      ( ESTA SUELTA )    
+        if(!isVocal(s[i])||((isVocal(s[i])) && i>0 && s[i+1]!='\0' && ((isVocal(s[i-1])&& isVocal(s[i+1]))||(s[i-1]==' '&& s[i+1]==' ')))){
+            s[t++]=s[i];
+        }
+    }
+    s[t]='\0';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Función para verificar si un carácter es una vocal
 int isVocal(char letra) {
     char c = tolower(letra);
