@@ -1,0 +1,76 @@
+/*
+Dada una matriz de chars de COLS columnas -donde COLS es una constante
+previamente definida-, verificar las filas que representan un palíndromo (capicúa). En
+cada celda puede haber letras, dígitos, símbolos, etc. Se debe considerar que las letras
+minúsculas no son equivalentes a las letras mayúsculas, por lo que "ala" es palíndromo
+pero "Ala" no lo es.
+Escribir una función elimina que reciba la matriz y la cantidad de filas de la misma, y
+elimine de la matriz las filas que sean capicúas. La función debe retornar cuántas filas
+quedaron en la matriz.
+Ejemplo: Con COLS = 6, si la matriz es:
+L # B B # L
+3 1 r R 1 3
+3 2 S S 2 3
+R L A H N N
+W A O Y U T
+Q S G S M A
+debe quedar de la siguiente forma y retornar 4, donde lo que quede almacenado en
+las últimas dos filas no tiene importancia.
+3 1 r R 1 3
+R L A H N N
+W A O Y U T
+Q S G S M A
+*/
+
+#include <assert.h>
+#include <string.h>
+
+#define COLS 6
+
+int capicua(char v[], unsigned int dim) {
+	for(int i=0,j=dim-1; i < j; i++, j--) {
+		if(v[i] != v[j]) {
+			return 0;
+		}	
+	}
+	return 1;
+}
+
+void copiarFila(char m[][COLS], int destino, int origen) {
+    if (destino==origen) {
+        return;
+    }
+	for(int i=0; i<COLS; i++)
+		m[destino][i] = m[origen][i];
+}
+
+
+int elimina(char m[][COLS], unsigned int filas) {
+	int i, j;
+	for(i=0, j=0; i < filas; i++) {
+		if(!capicua(m[i], filas)) {
+			copiarFila(m, j, i);
+			j++;
+		}
+	}
+	return j;
+}
+
+int main(void) {
+
+    char mat[][COLS] = {{ 'L', '#', 'B', 'B', '#', 'L'},
+	    		{ '3', '1', 'r', 'R', '1', '3'},
+	    		{ '3', '2', 'S', 'S', '2', '3'},
+	    		{ 'R', 'L', 'A', 'H', 'N', 'N'},
+	    		{ 'W', 'A', 'O', 'Y', 'U', 'T'},
+	    		{ 'Q', 'S', 'G', 'S', 'M', 'A'}};
+
+    int fil=elimina(mat, 6);
+    assert(fil==4);
+    assert(strncmp(mat[0], "31rR13", 6)==0);
+    assert(strncmp(mat[1], "RLAHNN", 6)==0);
+    assert(strncmp(mat[2], "WAOYUT", 6)==0);
+    assert(strncmp(mat[3], "QSGSMA", 6)==0);
+
+    return 0;
+}
