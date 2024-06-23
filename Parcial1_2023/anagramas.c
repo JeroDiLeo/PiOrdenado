@@ -12,6 +12,44 @@ esta condición) y retorne 1 si ambos son anagramas o 0 si no lo son.*/
 
 #define LETTERS ('Z'-'A'+1)
 
+int cuenta2(int frec[], const char *s) {
+    int cant = 0;
+    while(*s) {
+		if(isalpha(*s)) {	
+			frec[*s-'a']++;    // como se aclaró, podían asumir que eran minúsculas
+			cant++;
+		}
+		s++;	
+	}
+	return cant;
+}
+
+int anagrama2(const char *s, const char *t) {
+	// Creamos un vector para contar cuantas veces aparece cada letra en la primer frase
+	// Luego decrementamos para el segundo vector
+	unsigned int frec[LETTERS] = {0};
+	int letras_s, letras_t=0;
+	
+	letras_s = cuenta2(frec, s);
+	
+	// Mostramos otra forma válida de recorrer un string
+	for(int i=0; t[i]!='\0'; i++) {
+		if(isalpha(t[i])) {
+			int idx=t[i]-'a';
+			if (frec[idx]==0) {
+				return 0;
+			}
+			frec[idx]--;	
+			letras_t++;
+		}
+	}
+	return letras_s==letras_t;
+}
+
+
+
+
+//ABAJO ES MENOS EFICIENTE
 void cuenta(int frec[], const char *s) {
     while(*s) {
 		if(isalpha(*s)) {
@@ -46,43 +84,6 @@ int anagrama(const char *s, const char *t) {
 	}	
 	return 1;
 }
-
-// La versión anterior está bien, debajo una versión que evita recorrer el vector de frecuencias (que siempre tiene un tamaño fijo y no es extenso)
-int cuenta2(int frec[], const char *s) {
-    int cant = 0;
-    while(*s) {
-		if(isalpha(*s)) {
-			frec[*s-'a']++;    // como se aclaró, podían asumir que eran minúsculas
-			cant++;
-		}
-		s++;	
-	}
-	return cant;
-}
-
-int anagrama2(const char *s, const char *t) {
-	// Creamos un vector para contar cuantas veces aparece cada letra en la primer frase
-	// Luego decrementamos para el segundo vector
-	unsigned int frec[LETTERS] = {0};
-	int letras_s, letras_t=0;
-	
-	letras_s = cuenta2(frec, s);
-	
-	// Mostramos otra forma válida de recorrer un string
-	for(int i=0; t[i]!='\0'; i++) {
-		if(isalpha(t[i])) {
-			int idx=t[i]-'a';
-			if (frec[idx]==0) {
-				return 0;
-			}
-			frec[idx]--;	
-			letras_t++;
-		}
-	}
-	return letras_s==letras_t;
-}
-
-
 int main(void) {
 char * s = "anagrama";
 
