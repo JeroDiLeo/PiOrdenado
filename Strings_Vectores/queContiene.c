@@ -48,7 +48,7 @@ main(void) {
 
 int queContiene(const char * s1, const char * s2){
 
-	int vecAp[MAX_CHARS+1]={0};
+	int vecAp[MAX_CHARS]={0};
 	int cont = 0;
 	int x, y, i, j;
 	for(i=0; s2[i]!=0; i++){									//Cargo el vector de apariciones
