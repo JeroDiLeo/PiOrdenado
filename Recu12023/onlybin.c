@@ -16,6 +16,44 @@ las últimas cuatro filas no tiene importancia.
 1 1 1 1 1 0
 0 1 0 1 0 1
 */
+//IMPORTANTE MANEJO ASCII, NO 1 Y 0 TIPO INT
+
+//DEVUELVE NEWFILS(CONTADOR)
+
+#define COLS 4
+
+int onlyBin(char m[][COLS],int FILS){
+    
+    int newFils=0;
+    for(int i=0;i<FILS;i++){
+        int isBinary=1;
+        for(int j=0;j<COLS;){
+            int num=m[i][j];
+            if(num!='0' && num!='1'){
+                isBinary=0;
+            }
+        }
+        if(isBinary){
+            if(i!=newFils){ //------------------> es crucial para asegurar que solo se copien filas cuando es necesario, 
+                                                //evitando así operaciones redundantes y asegurando la eficiencia del algoritmo.
+                for(int j=0;j<COLS;j++){
+                    m[newFils][j]=m[i][j];
+                }
+            }
+            newFils++;
+        }
+    }
+    return newFils;
+}
+
+
+
+
+
+
+
+// Solución alternativa practicamente igual
+
 
 #include <stdio.h>
 #include <string.h>
