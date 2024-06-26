@@ -35,6 +35,7 @@ mucho más extensas, no sólo el primer string sino también los otros dos
 #define KEEP_CHAR 0
 
 
+
 //La flag va a ser KEEP_CHAR si la letra esta en s3 y DELETE_CHAR si esta en s2
 void markAppearances(const char *s,unsigned char vec[LETTERS],char flag){
     for(int i=0;s[i]!='\0';i++){

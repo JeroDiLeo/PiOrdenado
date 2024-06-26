@@ -57,3 +57,4 @@ void transformarXY(int angulo, int *dirx, int *diry){
     *dirx=direcciones[indice][0];
     *diry=direcciones[indice][1];
 }
+

@@ -37,7 +37,7 @@ int isUnderAttack(unsigned int n, char mat[][n], int row, int col){
     int rta = 0;
     for(int d=0; d < DIR && !rta; d++){ //si rta es 1, no se verifica más
         rta = hasQueen(n, mat, row+direcciones[d][0],col+direcciones[d][1], direcciones[d]);    //SI hasqueen devuelve 1, hay una reina en la dirección d
-    }
+    }0
     return rta;
 }
 // Función auxiliar que verifica si hay una reina en la posición row,col en la dirección dir
