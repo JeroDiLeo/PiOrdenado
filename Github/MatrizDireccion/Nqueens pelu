@@ -1,0 +1,35 @@
+int hasQueen(unsigned int n, char tablero[][n], int row, int col, int dir[2]){
+    for(int i = row, j = col; i >= 0 && i < n && j >=0 && j < n; i += dir[0], j += dir[1]){
+        if(tablero[i][j] == '1'){
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int underAttack(unsigned int n, char tablero[][n], int row, int col){
+    static int dir[][2] = {{0,1}, {1,1}, {1,0}, {1,-1}};
+    int nearQueen = 0;
+    for(int i = 0; i < DIRMAX && !nearQueen; i++){
+        nearQueen = hasQueen(n, tablero, row + dir[i][0], col + dir[i][1], dir[i]); // dir[i][0] y dir[0]
+    }
+    return nearQueen;
+}
+
+int nQueens(unsigned int n, char tablero[][n]){
+    if(n == 2 || n == 3){
+        return 0;
+    }
+
+    int safe = 1;
+    int queens = 0;
+    for(int i = 0; i < n && safe; i++){
+        for(int j = 0; j < n && safe; j++){
+            if(tablero[i][j] == '1'){
+                queens++;
+                safe = !underAttack(n, tablero, i, j);
+            }
+        }
+    }
+    return safe && queens == n;
+}
