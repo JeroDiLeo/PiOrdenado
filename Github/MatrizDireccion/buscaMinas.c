@@ -37,8 +37,8 @@ Un tablero sin minas (0 en todas las posiciones) es un tablero válido
 
 
 int buscoMinas(signed char tablero[][DIM],int fila, int col, int numero){
-    static int dir[2][8]={{-1,-1,-1,0,1,1,1,0},{-1,0,1,1,1,0,-1,-1}};
-    int flag, cantMinas=0;
+    static int dir[2][DIRECCIONES]={{-1,-1,-1,0,1,1,1,0},{-1,0,1,1,1,0,-1,-1}};
+    int cantMinas=0;
     for(i=0;i<DIRECCIONES;i++){
         int x=dir[0][i];
         int y=dir[1][i];
